@@ -2,7 +2,7 @@
 
 namespace News.ViewModels
 {
-    public class NewsViewModel : ViewModelBase
+    public class GeneralViewModel : ViewModelBase
     {
     }
 }

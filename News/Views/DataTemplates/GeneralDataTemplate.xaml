@@ -2,11 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:News.ViewModels">
 
-    <DataTemplate DataType="{x:Type viewModels:NewsViewModel}">
-        <Grid Background="AliceBlue">
-            <TextBlock Text="NEWS!!!"
-                       FontSize="55" />
-        </Grid>
+    <DataTemplate DataType="{x:Type viewModels:GeneralViewModel}">
+        <TabControl>
+            <TabItem Header="News">Первая вкладка</TabItem>
+            <TabItem Header="CurrencyExchange">Вторая вкладка</TabItem>
+        </TabControl>
     </DataTemplate>
 
 </ResourceDictionary>

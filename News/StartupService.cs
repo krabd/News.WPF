@@ -20,7 +20,7 @@ namespace News
         private void ConfigureViewModels(IServiceCollection services)
         {
             services.AddSingleton<MainWindowViewModel>();
-            services.AddTransient<NewsViewModel>();
+            services.AddTransient<GeneralViewModel>();
         }
 
         private void ConfigureModules(IServiceCollection services)
