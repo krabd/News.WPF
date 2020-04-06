@@ -8,17 +8,34 @@
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type viewModels:WorkspaceViewModel}">
-        <TabControl>
-            <TabItem Header="News">
-                <ContentPresenter Content="{Binding News}"
-                                  ContentTemplate="{StaticResource NewsDataTemplate}"/>
-            </TabItem>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <TabItem Header="Currency exchange">
-                <ContentPresenter Content="{Binding CurrencyExchange}"
-                                  ContentTemplate="{StaticResource CurrencyExchangeDataTemplate}"/>
-            </TabItem>
-        </TabControl>
+            <TabControl>
+                <TabItem Header="News">
+                    <ContentPresenter Content="{Binding News}"
+                                      ContentTemplate="{StaticResource NewsDataTemplate}" />
+                </TabItem>
+
+                <TabItem Header="Currency exchange">
+                    <ContentPresenter Content="{Binding CurrencyExchange}"
+                                      ContentTemplate="{StaticResource CurrencyExchangeDataTemplate}" />
+                </TabItem>
+            </TabControl>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Row="1">
+                <Button Content="Shutdown"
+                        Command="{Binding ShutdownCommand}"
+                        Width="200" />
+                <Button Content="Logout"
+                        Command="{Binding LogoutCommand}"
+                        Width="200" />
+            </StackPanel>
+        </Grid>
     </DataTemplate>
 
 </ResourceDictionary>

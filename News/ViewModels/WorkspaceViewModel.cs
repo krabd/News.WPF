@@ -2,8 +2,10 @@
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using News.CoreModule.ViewModels;
 using News.Utils;
+using Prism.Commands;
 
 namespace News.ViewModels
 {
@@ -15,10 +17,17 @@ namespace News.ViewModels
 
         public CurrencyExchangeViewModel CurrencyExchange { get; }
 
+        public ICommand ShutdownCommand { get; }
+
+        public ICommand LogoutCommand { get; }
+
         public WorkspaceViewModel(NewsViewModel news, CurrencyExchangeViewModel currencyExchange)
         {
             News = news;
             CurrencyExchange = currencyExchange;
+
+            ShutdownCommand = new DelegateCommand(OnShutdown);
+            LogoutCommand = new DelegateCommand(OnLogout);
         }
 
         public async Task InitializeAsync()
@@ -38,6 +47,16 @@ namespace News.ViewModels
             {
                 Debug.WriteLine(e);
             }
+        }
+
+        private void OnShutdown()
+        {
+
+        }
+
+        private void OnLogout()
+        {
+
         }
     }
 }
