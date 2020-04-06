@@ -88,6 +88,7 @@
     </ApplicationDefinition>
     <Compile Include="StartupService.cs" />
     <Compile Include="ViewModels\CurrencyExchangeViewModel.cs" />
+    <Compile Include="ViewModels\Items\NewsItemViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />

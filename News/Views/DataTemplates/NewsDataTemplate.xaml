@@ -3,7 +3,39 @@
                     xmlns:viewModels="clr-namespace:News.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:NewsViewModel}" x:Key="NewsDataTemplate">
-        <Grid Background="Chocolate" />
+        <ListView ItemsSource="{Binding News}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{Binding Title}"
+                                   HorizontalAlignment="Stretch"
+                                   TextWrapping="Wrap"
+                                   FontSize="30" />
+
+                        <TextBlock Text="{Binding Description}"
+                                   HorizontalAlignment="Stretch"
+                                   TextWrapping="Wrap"
+                                   FontSize="20"
+                                   Grid.Row="1"/>
+
+                        <StackPanel Orientation="Horizontal"
+                                    Margin="0,10,0,0"
+                                    Grid.Row="2">
+                            <TextBlock Text="{Binding Author}" />
+                            <TextBlock Text="{Binding PublishedDate}"
+                                       Margin="10,0,0,0" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </DataTemplate>
 
 </ResourceDictionary>
