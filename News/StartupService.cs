@@ -8,19 +8,17 @@ namespace News
     {
         public void Configure(IServiceCollection services)
         {
-            ConfigureServices(services);
             ConfigureViewModels(services);
             ConfigureModules(services);
-        }
-
-        private void ConfigureServices(IServiceCollection services)
-        {
         }
 
         private void ConfigureViewModels(IServiceCollection services)
         {
             services.AddSingleton<MainWindowViewModel>();
+
             services.AddTransient<GeneralViewModel>();
+            services.AddTransient<NewsViewModel>();
+            services.AddTransient<CurrencyExchangeViewModel>();
         }
 
         private void ConfigureModules(IServiceCollection services)

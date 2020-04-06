@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:News.ViewModels">
+
+    <DataTemplate DataType="{x:Type viewModels:NewsViewModel}" x:Key="NewsDataTemplate">
+        <Grid Background="Chocolate" />
+    </DataTemplate>
+
+</ResourceDictionary>

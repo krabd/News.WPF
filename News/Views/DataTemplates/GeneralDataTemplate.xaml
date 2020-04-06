@@ -2,10 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:News.ViewModels">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="NewsDataTemplate.xaml" />
+        <ResourceDictionary Source="CurrencyExchangeDataTemplate.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <DataTemplate DataType="{x:Type viewModels:GeneralViewModel}">
         <TabControl>
-            <TabItem Header="News">Первая вкладка</TabItem>
-            <TabItem Header="CurrencyExchange">Вторая вкладка</TabItem>
+            <TabItem Header="News">
+                <ContentPresenter Content="{Binding News}"
+                                  ContentTemplate="{StaticResource NewsDataTemplate}"/>
+            </TabItem>
+
+            <TabItem Header="Currency exchange">
+                <ContentPresenter Content="{Binding CurrencyExchange}"
+                                  ContentTemplate="{StaticResource CurrencyExchangeDataTemplate}"/>
+            </TabItem>
         </TabControl>
     </DataTemplate>
 
