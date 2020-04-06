@@ -149,6 +149,14 @@
       <Project>{3ddf4411-1684-4cb0-b4e9-924794b75cad}</Project>
       <Name>News.CoreModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\News.DataAccess\News.DataAccess.csproj">
+      <Project>{3dca2f50-6c2e-4b06-b86d-e16a6f3d2c83}</Project>
+      <Name>News.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\News.Domain\News.Domain.csproj">
+      <Project>{BD32A971-442E-4BDF-9C4F-506689297D7A}</Project>
+      <Name>News.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\News.Utils\News.Utils.csproj">
       <Project>{669fe99c-5df5-4ebd-8810-935647a1ecb7}</Project>
       <Name>News.Utils</Name>

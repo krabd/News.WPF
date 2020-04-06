@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.CoreModule", "News.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Utils", "News.Utils\News.Utils.csproj", "{669FE99C-5DF5-4EBD-8810-935647A1ECB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.DataAccess", "News.DataAccess\News.DataAccess.csproj", "{3DCA2F50-6C2E-4B06-B86D-E16A6F3D2C83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Domain", "News.Domain\News.Domain.csproj", "{BD32A971-442E-4BDF-9C4F-506689297D7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{669FE99C-5DF5-4EBD-8810-935647A1ECB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{669FE99C-5DF5-4EBD-8810-935647A1ECB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{669FE99C-5DF5-4EBD-8810-935647A1ECB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DCA2F50-6C2E-4B06-B86D-E16A6F3D2C83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DCA2F50-6C2E-4B06-B86D-E16A6F3D2C83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DCA2F50-6C2E-4B06-B86D-E16A6F3D2C83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DCA2F50-6C2E-4B06-B86D-E16A6F3D2C83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD32A971-442E-4BDF-9C4F-506689297D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD32A971-442E-4BDF-9C4F-506689297D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD32A971-442E-4BDF-9C4F-506689297D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD32A971-442E-4BDF-9C4F-506689297D7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

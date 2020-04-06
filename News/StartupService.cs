@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
+using News.CoreModule;
+using News.DataAccess;
 using News.ViewModels;
 
 namespace News
@@ -23,7 +25,8 @@ namespace News
 
         private void ConfigureModules(IServiceCollection services)
         {
-            new CoreModule.Configurator().Configure(services);
+            services.ConfigureCore();
+            services.ConfigureDataAccess();
         }
 
         public IServiceProvider BuildProvider(IServiceCollection services)
