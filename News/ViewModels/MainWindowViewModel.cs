@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Input;
 using News.CoreModule.Interfaces;
 using News.CoreModule.ViewModels;
