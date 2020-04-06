@@ -9,16 +9,19 @@ namespace News.ViewModels
     {
         public IWindowService WindowService { get; set; }
 
+        public NewsViewModel News { get; }
+
         public ICommand StartCommand { get; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(NewsViewModel news)
         {
+            News = news;
             StartCommand = new DelegateCommand(OnStart);
         }
 
         private void OnStart()
         {
-            
+            WindowService.Show(News, "Hot news 2020");
         }
     }
 }
