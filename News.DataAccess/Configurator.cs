@@ -16,6 +16,8 @@ namespace News.DataAccess
                 return repository;
             });
 
+            services.AddTransient<ICurrencyExchangeRepository, CurrencyExchangeRepository>();
+
             return services;
         }
     }

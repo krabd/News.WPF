@@ -61,16 +61,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configurator.cs" />
-    <Compile Include="EntityModels\NewsEntity.cs" />
-    <Compile Include="EntityModels\NewsResponseEntity.cs" />
+    <Compile Include="Interfaces\ICurrencyExchangeRepository.cs" />
     <Compile Include="Interfaces\INewsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CurrencyExchangeRepository.cs" />
     <Compile Include="Repositories\NewsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\News.Domain\News.Domain.csproj">
       <Project>{BD32A971-442E-4BDF-9C4F-506689297D7A}</Project>
       <Name>News.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\News.Entity\News.Entity.csproj">
+      <Project>{0DED067A-9821-46D3-9A79-B7DB0B30B448}</Project>
+      <Name>News.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

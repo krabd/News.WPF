@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.DataAccess", "News.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Domain", "News.Domain\News.Domain.csproj", "{BD32A971-442E-4BDF-9C4F-506689297D7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Entity", "News.Entity\News.Entity.csproj", "{0DED067A-9821-46D3-9A79-B7DB0B30B448}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BD32A971-442E-4BDF-9C4F-506689297D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD32A971-442E-4BDF-9C4F-506689297D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD32A971-442E-4BDF-9C4F-506689297D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DED067A-9821-46D3-9A79-B7DB0B30B448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DED067A-9821-46D3-9A79-B7DB0B30B448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DED067A-9821-46D3-9A79-B7DB0B30B448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DED067A-9821-46D3-9A79-B7DB0B30B448}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

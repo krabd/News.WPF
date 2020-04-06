@@ -3,7 +3,31 @@
                     xmlns:viewModels="clr-namespace:News.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:CurrencyExchangeViewModel}" x:Key="CurrencyExchangeDataTemplate">
-        <Grid Background="Aquamarine" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="USD: "
+                       Grid.Row="0"
+                       Grid.Column="0"/>
+            <TextBlock Text="{Binding Usd}"
+                       Grid.Row="0"
+                       Grid.Column="1"/>
+
+            <TextBlock Text="EUR: "
+                       Grid.Row="1"
+                       Grid.Column="0"/>
+            <TextBlock Text="{Binding Eur}"
+                       Grid.Row="1"
+                       Grid.Column="1"/>
+
+        </Grid>
     </DataTemplate>
     
 </ResourceDictionary>

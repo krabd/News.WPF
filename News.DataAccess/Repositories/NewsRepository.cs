@@ -4,9 +4,9 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using News.DataAccess.EntityModels;
 using News.DataAccess.Interfaces;
 using News.Domain.Models;
+using News.Entity.EntityModels.News;
 using Newtonsoft.Json;
 
 namespace News.DataAccess.Repositories

@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace News.DataAccess.EntityModels
+namespace News.Entity.EntityModels.News
 {
     public class NewsEntity
     {
