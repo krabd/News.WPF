@@ -19,18 +19,21 @@ namespace News.DataAccess.Repositories
 
         public Task<IReadOnlyCollection<NewsModel>> GetNewsAsync(CancellationToken token)
         {
-            if (string.IsNullOrEmpty(_apiKey))
-                throw new ArgumentException("ApiKey is empty");
-
-            var url = $"http://newsapi.org/v2/top-headlines?country=us&apiKey={_apiKey}";
-
-            using (var client = new WebClient())
+            return Task.Run<IReadOnlyCollection<NewsModel>>(async () =>
             {
-                var json = client.DownloadString(url);
-                var a = 1;
-            }
+                if (string.IsNullOrEmpty(_apiKey))
+                    throw new ArgumentException("ApiKey is empty");
 
-            throw new NotImplementedException();
+                var url = $"http://newsapi.org/v2/top-headlines?country=us&apiKey={_apiKey}";
+
+                using (var client = new WebClient())
+                {
+                    var json = await client.DownloadStringTaskAsync(new Uri(url));
+                    var a = 1;
+                }
+
+                throw new NotImplementedException();
+            }, token);
         }
     }
 }
