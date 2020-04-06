@@ -7,7 +7,7 @@
         <ResourceDictionary Source="CurrencyExchangeDataTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate DataType="{x:Type viewModels:GeneralViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:WorkspaceViewModel}">
         <TabControl>
             <TabItem Header="News">
                 <ContentPresenter Content="{Binding News}"

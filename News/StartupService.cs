@@ -16,7 +16,7 @@ namespace News
         {
             services.AddSingleton<MainWindowViewModel>();
 
-            services.AddTransient<GeneralViewModel>();
+            services.AddTransient<WorkspaceViewModel>();
             services.AddTransient<NewsViewModel>();
             services.AddTransient<CurrencyExchangeViewModel>();
         }

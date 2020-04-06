@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -56,6 +58,11 @@ namespace News.Utils
                 // порождается при закрытии приложения
                 return default;
             }
+        }
+
+        public static async Task WhenAll(params Task[] tasks)
+        {
+            await Task.WhenAll(tasks.Where(t => t != null)).ConfigureAwait(false);
         }
     }
 }

@@ -1,28 +1,33 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Diagnostics;
+using System.Windows.Input;
 using News.CoreModule.Interfaces;
 using News.CoreModule.ViewModels;
+using News.Utils.Extensions;
 using Prism.Commands;
 
 namespace News.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public IWindowService WindowService { get; set; }
+        private readonly IServiceProvider _provider;
 
-        public GeneralViewModel General { get; }
+        public IWindowService WindowService { get; set; }
 
         public ICommand StartCommand { get; }
 
-        public MainWindowViewModel(GeneralViewModel general)
+        public MainWindowViewModel(IServiceProvider provider)
         {
-            General = general;
+            _provider = provider;
 
             StartCommand = new DelegateCommand(OnStart);
         }
 
         private void OnStart()
         {
-            WindowService.Show(General, "Hot news 2020");
+            var workspace = _provider.Resolve<WorkspaceViewModel>();
+            workspace.InitializeAsync();
+            WindowService.Show(workspace, "Hot news 2020");
         }
     }
 }
