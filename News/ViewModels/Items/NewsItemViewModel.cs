@@ -11,6 +11,7 @@ namespace News.ViewModels.Items
         private string _description;
         private string _url;
         private DateTime _publishedDate;
+        private string _imageUrl;
 
         public string Author
         {
@@ -36,6 +37,12 @@ namespace News.ViewModels.Items
             set => SetProperty(ref _url, value);
         }
 
+        public string ImageUrl
+        {
+            get => _imageUrl;
+            set => SetProperty(ref _imageUrl, value);
+        }
+
         public DateTime PublishedDate
         {
             get => _publishedDate;
@@ -48,6 +55,7 @@ namespace News.ViewModels.Items
             Title = news.Title;
             Description = news.Description;
             Url = news.Url;
+            ImageUrl = news.ImageUrl;
             PublishedDate = news.PublishedDate;
         }
     }

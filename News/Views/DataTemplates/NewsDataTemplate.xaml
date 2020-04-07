@@ -2,10 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:News.ViewModels"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                    xmlns:behaviors="clr-namespace:News.Behaviors">
+                    xmlns:behaviors="clr-namespace:News.Behaviors"
+                    xmlns:coreBehaviors="clr-namespace:News.CoreModule.Behaviors;assembly=News.CoreModule">
 
     <DataTemplate DataType="{x:Type viewModels:NewsViewModel}" x:Key="NewsDataTemplate">
         <ListView ItemsSource="{Binding OrderedNews}"
+                  SelectedItem="{Binding SelectedNews}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -39,6 +41,7 @@
             </ListView.ItemTemplate>
 
             <i:Interaction.Behaviors>
+                <coreBehaviors:MvvmWindowBehavior />
                 <behaviors:ListViewScrollToBottomDetectBehavior EndOfScrollCommand="{Binding LoadNewPageCommand}"/>
             </i:Interaction.Behaviors>
         </ListView>

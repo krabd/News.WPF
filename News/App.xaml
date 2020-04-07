@@ -7,6 +7,7 @@
                 <ResourceDictionary Source="pack://application:,,,/News.Controls;component/Generic.xaml" />
 
                 <ResourceDictionary Source="Views/DataTemplates/WorkspaceDataTemplate.xaml" />
+                <ResourceDictionary Source="Views/DataTemplates/NewsDetailsDataTemplate.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

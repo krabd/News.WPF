@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using News.Comparers;
+using News.CoreModule.Interfaces;
 using News.CoreModule.ViewModels;
 using News.DataAccess.Interfaces;
 using News.Domain.Models;
@@ -29,10 +30,19 @@ namespace News.ViewModels
         private readonly int _pageSize;
 
         private int _totalCount;
+        private NewsItemViewModel _selectedNews;
+
+        public IWindowService WindowService { get; set; }
 
         public IEnumerable<NewsItemViewModel> OrderedNews => News.OrderByDescending(i => i.PublishedDate);
 
         public ObservableCollection<NewsItemViewModel> News { get; } = new ObservableCollection<NewsItemViewModel>();
+
+        public NewsItemViewModel SelectedNews
+        {
+            get => _selectedNews;
+            set => SetProperty(ref _selectedNews, value, OnSelectedNewsChanged);
+        }
 
         public event EventHandler<IReadOnlyCollection<NewsModel>> NewsAdded;
 
@@ -101,6 +111,17 @@ namespace News.ViewModels
             }
         }
 
+        private void OnSelectedNewsChanged()
+        {
+            if (SelectedNews == null) return;
+
+            WindowService.ShowDialog(new NewsDetailsViewModel
+            {
+                Url = SelectedNews.Url,
+                ImageUrl = SelectedNews.ImageUrl
+            }, $"{SelectedNews.Title}");
+        }
+
         private void OnNewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             RaisePropertyChanged(nameof(OrderedNews));
@@ -118,11 +139,11 @@ namespace News.ViewModels
             Tools.DispatchedInvoke(() =>
             {
                 var unique = e.Select(i =>
-                                        {
-                                            var newsItem = new NewsItemViewModel();
-                                            newsItem.Initialize(i);
-                                            return newsItem;
-                                        })
+                    {
+                        var newsItem = new NewsItemViewModel();
+                        newsItem.Initialize(i);
+                        return newsItem;
+                    })
                     .Distinct(_newsComparer)
                     .Except(News.ToList(), _newsComparer)
                     .ToList();

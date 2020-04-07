@@ -35,8 +35,8 @@ namespace News.CoreModule.Services
         {
             var window = new BaseWindow
             {
-                SizeToContent = SizeToContent.WidthAndHeight,
-                ResizeMode = ResizeMode.NoResize,
+                Width = 800,
+                Height = 600,
                 DataContext = dataContext,
                 Owner = _parentWindow ?? Application.Current.MainWindow,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,

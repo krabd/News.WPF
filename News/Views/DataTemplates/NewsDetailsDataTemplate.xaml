@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:News.ViewModels"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+
+    <DataTemplate DataType="{x:Type viewModels:NewsDetailsViewModel}">
+        <StackPanel>
+            <TextBlock
+                Text="Go to news"
+                TextWrapping="Wrap"
+                LineStackingStrategy="BlockLineHeight"
+                TextDecorations="Underline"
+                Cursor="Hand"
+                HorizontalAlignment="Left">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                        <i:InvokeCommandAction
+                            Command="{Binding GoToNewsCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBlock>
+
+            <Image Source="{Binding ImageUrl}" />
+        </StackPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

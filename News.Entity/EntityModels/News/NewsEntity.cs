@@ -17,6 +17,9 @@ namespace News.Entity.EntityModels.News
         [JsonProperty("url")]
         public string Url { get; set; }
 
+        [JsonProperty("urlToImage")]
+        public string ImageUrl { get; set; }
+
         [JsonProperty("publishedAt")]
         public DateTime PublishedDate { get; set; }
     }

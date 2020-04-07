@@ -57,6 +57,7 @@ namespace News.DataAccess.Repositories
                             Title = i.Title,
                             Description = i.Description,
                             Url = i.Url,
+                            ImageUrl = i.ImageUrl,
                             PublishedDate = i.PublishedDate.ToLocalTime()
                         }).ToList()
                     });
@@ -92,6 +93,7 @@ namespace News.DataAccess.Repositories
                         Title = i.Title,
                         Description = i.Description,
                         Url = i.Url,
+                        ImageUrl = i.ImageUrl,
                         PublishedDate = i.PublishedDate.ToLocalTime()
                     }).ToList());
                 }
