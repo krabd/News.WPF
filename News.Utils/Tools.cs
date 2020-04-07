@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,6 +64,11 @@ namespace News.Utils
         public static async Task WhenAll(params Task[] tasks)
         {
             await Task.WhenAll(tasks.Where(t => t != null)).ConfigureAwait(false);
+        }
+
+        public static async Task WhenAll(IEnumerable<Task> tasks, params Task[] additionalTasks)
+        {
+            await Task.WhenAll(tasks.Concat(additionalTasks).Where(t => t != null)).ConfigureAwait(false);
         }
     }
 }

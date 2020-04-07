@@ -32,21 +32,12 @@ namespace News.Utils.Helpers
             }
         }
 
-        public static T VisualParentOfType<T>(Visual element) where T : DependencyObject
+        public static T VisualParentOfType<T>(DependencyObject element) where T : DependencyObject
         {
             if (element != null)
                 return GetVisualParents(element).OfType<T>().DefaultIfEmpty().First();
 
             throw new ArgumentNullException("Нельзя искать родителя несуществующего элемента" + nameof(element));
-        }
-
-        private static DependencyObject GetLogicalParent(DependencyObject element)
-        {
-            var parent = LogicalTreeHelper.GetParent(element);
-            if (parent == null && element is FrameworkElement frameworkElement)
-                parent = frameworkElement.Parent;
-
-            return parent;
         }
     }
 }

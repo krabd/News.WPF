@@ -4,13 +4,20 @@
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
 
     <DataTemplate DataType="{x:Type viewModels:NewsDetailsViewModel}">
-        <StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
             <TextBlock Text="Go to news"
-                       TextWrapping="Wrap"
+                       FontSize="25"
                        LineStackingStrategy="BlockLineHeight"
                        TextDecorations="Underline"
                        Cursor="Hand"
-                       HorizontalAlignment="Left">
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Height="80">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
                         <i:InvokeCommandAction Command="{Binding GoToNewsCommand}" />
@@ -18,8 +25,10 @@
                 </i:Interaction.Triggers>
             </TextBlock>
 
-            <Image Source="{Binding ImageUrl}" />
-        </StackPanel>
+            <Image Source="{Binding ImageUrl}"
+                   Grid.Row="1"/>
+
+        </Grid>
     </DataTemplate>
 
 </ResourceDictionary>

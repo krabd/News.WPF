@@ -47,5 +47,32 @@ namespace News.DataAccess.Repositories
                 }
             }, token);
         }
+
+        public Task<Result<Status, CurrencyExchangeModel>> GetCurrencyExchangesAsync(DateTime dateTime, CancellationToken token)
+        {
+            return Task.Run(async () =>
+            {
+                try
+                {
+                    var endpoint = dateTime.ToString("yyyy-MM-dd");
+
+                    var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + "base=" + "RUB");
+                    var httpResponse = await _client.SendAsync(httpRequest, token);
+                    var json = await httpResponse.Content.ReadAsStringAsync();
+
+                    var currencyExchange = JsonConvert.DeserializeObject<CurrencyExchangeResponseEntity>(json);
+
+                    return new Result<Status, CurrencyExchangeModel>(Status.Ok, new CurrencyExchangeModel
+                    {
+                        Usd = currencyExchange.Rates.Usd,
+                        Eur = currencyExchange.Rates.Eur
+                    });
+                }
+                catch (Exception e)
+                {
+                    return new Result<Status, CurrencyExchangeModel>(Status.Fail, message: e.Message);
+                }
+            }, token);
+        }
     }
 }

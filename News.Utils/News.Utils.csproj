@@ -60,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ServiceProviderExtensions.cs" />
-    <Compile Include="Helpers\ChildOfTypeHelper.cs" />
     <Compile Include="Helpers\ControlPCHelper.cs" />
     <Compile Include="Helpers\ParentOfTypeHelper.cs" />
     <Compile Include="Helpers\Result.cs" />
