@@ -4,12 +4,8 @@
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                     xmlns:behaviors="clr-namespace:News.Behaviors"
                     xmlns:controls="clr-namespace:News.Controls.Controls;assembly=News.Controls"
-                    xmlns:coreBehaviors="clr-namespace:News.CoreModule.Behaviors;assembly=News.CoreModule">
-
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="NewsDataTemplate.xaml" />
-        <ResourceDictionary Source="CurrencyExchangeDataTemplate.xaml" />
-    </ResourceDictionary.MergedDictionaries>
+                    xmlns:coreBehaviors="clr-namespace:News.CoreModule.Behaviors;assembly=News.CoreModule"
+                    xmlns:views="clr-namespace:News.Views">
 
     <DataTemplate DataType="{x:Type viewModels:WorkspaceViewModel}">
         <Grid>
@@ -20,13 +16,11 @@
 
             <TabControl>
                 <TabItem Header="News">
-                    <ContentPresenter Content="{Binding News}"
-                                      ContentTemplate="{StaticResource NewsDataTemplate}" />
+                    <views:NewsView DataContext="{Binding News}" />
                 </TabItem>
 
                 <TabItem Header="Currency exchange">
-                    <ContentPresenter Content="{Binding CurrencyExchange}"
-                                      ContentTemplate="{StaticResource CurrencyExchangeDataTemplate}" />
+                    <views:CurrencyExchangeView DataContext="{Binding CurrencyExchange}" />
                 </TabItem>
             </TabControl>
 
