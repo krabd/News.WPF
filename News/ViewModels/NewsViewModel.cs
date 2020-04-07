@@ -14,7 +14,7 @@ using News.ViewModels.Items;
 
 namespace News.ViewModels
 {
-    public class NewsViewModel : ViewModelBase
+    public class NewsViewModel : ViewModelBase, INotifyAboutNews
     {
         private readonly INewsRepository _newsRepository;
         private readonly IUpdateNewsService _newsService;
@@ -22,6 +22,8 @@ namespace News.ViewModels
         public IEnumerable<NewsItemViewModel> OrderedNews => News.OrderByDescending(i => i.PublishedDate);
 
         public ObservableCollection<NewsItemViewModel> News { get; } = new ObservableCollection<NewsItemViewModel>();
+
+        public event EventHandler<IReadOnlyCollection<NewsModel>> NewsAdded;
 
         public NewsViewModel(INewsRepository newsRepository, IUpdateNewsService newsService)
         {
@@ -52,6 +54,8 @@ namespace News.ViewModels
 
         private void OnNewsAdded(object sender, IReadOnlyCollection<NewsModel> e)
         {
+            NewsAdded?.Invoke(this, e);
+
             AddNews(e);
         }
 

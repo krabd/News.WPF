@@ -31,8 +31,8 @@ namespace News.DataAccess.Repositories
                 var endpoint = "everything";
 
                 var queryParams = GetDefaultQueryParams();
-                queryParams.Add("from=" + DateTime.Now.ToString("yyyy-MM-dd"));
-                //queryParams.Add("to=" + DateTime.Now.AddHours(-6).ToString("yyyy-MM-ddTHH:MM:ss"));
+                queryParams.Add("from=" + DateTime.UtcNow.ToString("yyyy-MM-dd"));
+                //queryParams.Add("to=" + DateTime.UtcNow.AddHours(-6).ToString("yyyy-MM-ddTHH:MM:ss"));
 
                 var querystring = string.Join("&", queryParams.ToArray());
 

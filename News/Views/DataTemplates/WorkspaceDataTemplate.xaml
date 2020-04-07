@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:News.ViewModels">
+                    xmlns:viewModels="clr-namespace:News.ViewModels"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:behaviors="clr-namespace:News.Behaviors">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="NewsDataTemplate.xaml" />
@@ -35,6 +37,10 @@
                         Command="{Binding LogoutCommand}"
                         Width="200" />
             </StackPanel>
+
+            <i:Interaction.Behaviors>
+                <behaviors:AddNewsNotificationBehavior NotifyAboutNews="{Binding News}"/>
+            </i:Interaction.Behaviors>
         </Grid>
     </DataTemplate>
 
