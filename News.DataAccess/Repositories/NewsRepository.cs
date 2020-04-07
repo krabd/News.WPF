@@ -29,35 +29,42 @@ namespace News.DataAccess.Repositories
             _client.DefaultRequestHeaders.Add("x-api-key", apiKey);
         }
 
-        public Task<Result<Status, NewsResult>> GetNewsAsync(CancellationToken token, int page)
+        public Task<Result<Status, NewsResult>> GetNewsAsync(int page, CancellationToken token)
         {
             return Task.Run(async () =>
             {
-                var endpoint = "everything";
-                var queryParams = _queryParamsFactory.Create(page, _pageSize, DateTime.UtcNow.Date); 
-                //_queryParamsFactory.Create(page, _pageSize, DateTime.UtcNow.Date, DateTime.UtcNow.AddHours(-6));
-
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
-                var httpResponse = await _client.SendAsync(httpRequest, token);
-                var json = await httpResponse.Content.ReadAsStringAsync();
-
-                var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
-
-                if (string.Equals(news.Status, "error"))
-                    return new Result<Status, NewsResult>(Status.Fail, message: news.Message);
-
-                return new Result<Status, NewsResult>(Status.Ok, new NewsResult
+                try
                 {
-                    TotalCount = news.TotalCount,
-                    News = news.News.Select(i => new NewsModel
+                    var endpoint = "everything";
+                    var queryParams = _queryParamsFactory.Create(page, _pageSize, DateTime.UtcNow.Date);
+                    //_queryParamsFactory.Create(page, _pageSize, DateTime.UtcNow.Date, DateTime.UtcNow.AddHours(-6));
+
+                    var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
+                    var httpResponse = await _client.SendAsync(httpRequest, token);
+                    var json = await httpResponse.Content.ReadAsStringAsync();
+
+                    var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
+
+                    if (string.Equals(news.Status, "error"))
+                        return new Result<Status, NewsResult>(Status.Fail, message: news.Message);
+
+                    return new Result<Status, NewsResult>(Status.Ok, new NewsResult
                     {
-                        Author = i.Author,
-                        Title = i.Title,
-                        Description = i.Description,
-                        Url = i.Url,
-                        PublishedDate = i.PublishedDate.ToLocalTime()
-                    }).ToList()
-                });
+                        TotalCount = news.TotalCount,
+                        News = news.News.Select(i => new NewsModel
+                        {
+                            Author = i.Author,
+                            Title = i.Title,
+                            Description = i.Description,
+                            Url = i.Url,
+                            PublishedDate = i.PublishedDate.ToLocalTime()
+                        }).ToList()
+                    });
+                }
+                catch (Exception e)
+                {
+                    return new Result<Status, NewsResult>(Status.Fail, message: e.Message);
+                }
             }, token);
         }
 
@@ -65,26 +72,33 @@ namespace News.DataAccess.Repositories
         {
             return Task.Run(async () =>
             {
-                var endpoint = "everything";
-                var queryParams = _queryParamsFactory.Create(1, _pageSize, startDate.AddSeconds(1));
-
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
-                var httpResponse = await _client.SendAsync(httpRequest, token);
-                var json = await httpResponse.Content.ReadAsStringAsync();
-
-                var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
-
-                if (string.Equals(news.Status, "error"))
-                    return new Result<Status, IReadOnlyCollection<NewsModel>>(Status.Fail, message: news.Message);
-
-                return new Result<Status, IReadOnlyCollection<NewsModel>>(Status.Ok, news.News.Select(i => new NewsModel
+                try
                 {
-                    Author = i.Author,
-                    Title = i.Title,
-                    Description = i.Description,
-                    Url = i.Url,
-                    PublishedDate = i.PublishedDate.ToLocalTime()
-                }).ToList());
+                    var endpoint = "everything";
+                    var queryParams = _queryParamsFactory.Create(1, _pageSize, startDate.AddSeconds(1));
+
+                    var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
+                    var httpResponse = await _client.SendAsync(httpRequest, token);
+                    var json = await httpResponse.Content.ReadAsStringAsync();
+
+                    var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
+
+                    if (string.Equals(news.Status, "error"))
+                        return new Result<Status, IReadOnlyCollection<NewsModel>>(Status.Fail, message: news.Message);
+
+                    return new Result<Status, IReadOnlyCollection<NewsModel>>(Status.Ok, news.News.Select(i => new NewsModel
+                    {
+                        Author = i.Author,
+                        Title = i.Title,
+                        Description = i.Description,
+                        Url = i.Url,
+                        PublishedDate = i.PublishedDate.ToLocalTime()
+                    }).ToList());
+                }
+                catch (Exception e)
+                {
+                    return new Result<Status, IReadOnlyCollection<NewsModel>>(Status.Fail, message: e.Message);
+                }
             }, token);
         }
     }

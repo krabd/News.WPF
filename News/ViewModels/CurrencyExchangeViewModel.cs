@@ -1,7 +1,9 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using News.CoreModule.ViewModels;
 using News.DataAccess.Interfaces;
+using News.Utils.Helpers;
 
 namespace News.ViewModels
 {
@@ -33,8 +35,15 @@ namespace News.ViewModels
             var currencyExchanges = await _currencyExchangeRepository.GetCurrencyExchangesAsync(token);
             token.ThrowIfCancellationRequested();
 
-            Usd = 1 / currencyExchanges.Usd;
-            Eur = 1 / currencyExchanges.Eur;
+            if (currencyExchanges.Value == Status.Fail)
+            {
+                Debug.WriteLine(currencyExchanges.Message);
+            }
+            else
+            {
+                Usd = 1 / currencyExchanges.Model.Usd;
+                Eur = 1 / currencyExchanges.Model.Eur;
+            }
         }
     }
 }

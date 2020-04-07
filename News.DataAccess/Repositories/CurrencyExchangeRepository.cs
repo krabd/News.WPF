@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using News.DataAccess.Interfaces;
 using News.Domain.Models;
 using News.Entity.EntityModels.CurrencyExchange;
+using News.Utils.Helpers;
 using Newtonsoft.Json;
 
 namespace News.DataAccess.Repositories
@@ -20,30 +21,30 @@ namespace News.DataAccess.Repositories
             _baseUrl = baseUrl;
         }
 
-        public Task<CurrencyExchangeModel> GetCurrencyExchangesAsync(CancellationToken token)
+        public Task<Result<Status, CurrencyExchangeModel>> GetCurrencyExchangesAsync(CancellationToken token)
         {
             return Task.Run(async () =>
             {
-                var endpoint = "latest";
-
-                var queryParams = new List<string>
+                try
                 {
-                    "base=" + "RUB",
-                };
+                    var endpoint = "latest";
 
-                var querystring = string.Join("&", queryParams.ToArray());
+                    var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + "base=" + "RUB");
+                    var httpResponse = await _client.SendAsync(httpRequest, token);
+                    var json = await httpResponse.Content.ReadAsStringAsync();
 
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + querystring);
-                var httpResponse = await _client.SendAsync(httpRequest, token);
-                var json = await httpResponse.Content.ReadAsStringAsync();
+                    var currencyExchange = JsonConvert.DeserializeObject<CurrencyExchangeResponseEntity>(json);
 
-                var currencyExchange = JsonConvert.DeserializeObject<CurrencyExchangeResponseEntity>(json);
-
-                return new CurrencyExchangeModel
+                    return new Result<Status, CurrencyExchangeModel>(Status.Ok, new CurrencyExchangeModel
+                    {
+                        Usd = currencyExchange.Rates.Usd,
+                        Eur = currencyExchange.Rates.Eur
+                    });
+                }
+                catch (Exception e)
                 {
-                    Usd = currencyExchange.Rates.Usd,
-                    Eur = currencyExchange.Rates.Eur
-                };
+                    return new Result<Status, CurrencyExchangeModel>(Status.Fail, message: e.Message);
+                }
             }, token);
         }
     }

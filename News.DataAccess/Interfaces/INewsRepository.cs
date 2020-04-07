@@ -9,8 +9,8 @@ namespace News.DataAccess.Interfaces
 {
     public interface INewsRepository
     {
-        Task<Result<Status, NewsResult>> GetNewsAsync(CancellationToken token, int page);
+        Task<Result<Status, NewsResult>> GetNewsAsync(int page, CancellationToken token = default);
 
-        Task<Result<Status, IReadOnlyCollection<NewsModel>>> GetNewsAsync(DateTime startDate, CancellationToken token);
+        Task<Result<Status, IReadOnlyCollection<NewsModel>>> GetNewsAsync(DateTime startDate, CancellationToken token = default);
     }
 }

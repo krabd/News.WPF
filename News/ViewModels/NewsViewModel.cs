@@ -56,7 +56,7 @@ namespace News.ViewModels
         {
             _newsService.Stop();
 
-            var news = await _newsRepository.GetNewsAsync(token, 1);
+            var news = await _newsRepository.GetNewsAsync(1, token);
             token.ThrowIfCancellationRequested();
 
             if (news.Value == Status.Fail)
@@ -82,7 +82,7 @@ namespace News.ViewModels
                 if (diff <= 0) return;
 
                 var loadedPageCount = (int)Math.Truncate((decimal)itemsCount / _pageSize);
-                var news = await _newsRepository.GetNewsAsync(default, loadedPageCount + 1);
+                var news = await _newsRepository.GetNewsAsync(loadedPageCount + 1);
 
                 if (news.Value == Status.Fail)
                 {

@@ -42,10 +42,10 @@ namespace News.Services
                     while (!token.IsCancellationRequested)
                     {
 
-                        await Task.Delay(TimeSpan.FromSeconds(REQUEST_NEWS_TIMEOUT_SECONDS), default);
+                        await Task.Delay(TimeSpan.FromSeconds(REQUEST_NEWS_TIMEOUT_SECONDS));
                         token.ThrowIfCancellationRequested();
 
-                        var news = await _repository.GetNewsAsync(_lastDate, default);
+                        var news = await _repository.GetNewsAsync(_lastDate);
                         token.ThrowIfCancellationRequested();
 
                         if (news.Value == Status.Fail)
