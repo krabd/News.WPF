@@ -10,6 +10,8 @@ namespace News.Domain.Models
 
         public string Description { get; set; }
 
+        public string Url { get; set; }
+
         public DateTime PublishedDate { get; set; }
     }
 }

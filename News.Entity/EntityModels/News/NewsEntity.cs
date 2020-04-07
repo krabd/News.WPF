@@ -14,6 +14,9 @@ namespace News.Entity.EntityModels.News
         [JsonProperty("description")]
         public string Description { get; set; }
 
+        [JsonProperty("url")]
+        public string Url { get; set; }
+
         [JsonProperty("publishedAt")]
         public DateTime PublishedDate { get; set; }
     }

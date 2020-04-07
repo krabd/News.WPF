@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using News.Comparers;
 using News.CoreModule.ViewModels;
 using News.DataAccess.Interfaces;
 using News.Domain.Models;
@@ -22,6 +23,8 @@ namespace News.ViewModels
     {
         private readonly INewsRepository _newsRepository;
         private readonly IUpdateNewsService _newsService;
+
+        private readonly NewsComparer _newsComparer;
         private readonly int _pageSize;
 
         private int _totalCount;
@@ -44,6 +47,7 @@ namespace News.ViewModels
             News.CollectionChanged += OnNewsCollectionChanged;
             _newsService.NewsAdded += OnNewsAdded;
 
+            _newsComparer = new NewsComparer();
             _pageSize = Convert.ToInt32(ConfigurationManager.AppSettings.Get("newsLoadingPageSize"));
         }
 
@@ -67,7 +71,14 @@ namespace News.ViewModels
             try
             {
                 var diff = _totalCount - itemsCount;
+                if (diff <= 0) return;
 
+                var loadedPageCount = (int)Math.Truncate((decimal)itemsCount / _pageSize);
+                var news = await _newsRepository.GetNewsAsync(default, loadedPageCount + 1);
+
+                _totalCount = news.TotalCount;
+
+                AddNews(news.News);
             }
             catch (Exception e)
             {
@@ -91,12 +102,17 @@ namespace News.ViewModels
         {
             Tools.DispatchedInvoke(() =>
             {
-                News.AddRange(e.OrderByDescending(i => i.PublishedDate).Select(i =>
-                {
-                    var newsItem = new NewsItemViewModel();
-                    newsItem.Initialize(i);
-                    return newsItem;
-                }));
+                var unique = e.Select(i =>
+                                        {
+                                            var newsItem = new NewsItemViewModel();
+                                            newsItem.Initialize(i);
+                                            return newsItem;
+                                        })
+                    .Distinct(_newsComparer)
+                    .Except(News.ToList(), _newsComparer)
+                    .ToList();
+
+                News.AddRange(unique);
             });
         }
     }
