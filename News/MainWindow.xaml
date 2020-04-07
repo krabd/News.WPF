@@ -22,10 +22,10 @@
                 BorderBrush="OrangeRed"
                 BorderThickness="5"
                 Cursor="Hand"
-                Width="100"
+                Width="120"
                 Height="50">
             <TextBlock Text="Click ME!"
-                       FontSize="20"
+                       FontSize="25"
                        FontWeight="Bold"
                        Foreground="ForestGreen"
                        HorizontalAlignment="Center"

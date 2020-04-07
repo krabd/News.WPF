@@ -187,6 +187,10 @@
       <Project>{BD32A971-442E-4BDF-9C4F-506689297D7A}</Project>
       <Name>News.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\News.Styles\News.Styles.csproj">
+      <Project>{ee67fe5c-f1ee-41b0-889e-3460924d2b93}</Project>
+      <Name>News.Styles</Name>
+    </ProjectReference>
     <ProjectReference Include="..\News.Utils\News.Utils.csproj">
       <Project>{669fe99c-5df5-4ebd-8810-935647a1ecb7}</Project>
       <Name>News.Utils</Name>

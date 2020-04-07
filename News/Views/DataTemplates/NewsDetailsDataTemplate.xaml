@@ -6,15 +6,12 @@
     <DataTemplate DataType="{x:Type viewModels:NewsDetailsViewModel}">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Go to news"
-                       FontSize="25"
-                       LineStackingStrategy="BlockLineHeight"
-                       TextDecorations="Underline"
-                       Cursor="Hand"
+            <TextBlock Style="{StaticResource HyperLinkTextBlockStyle}"
+                       Text="Go to news"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Height="80">
@@ -26,7 +23,7 @@
             </TextBlock>
 
             <Image Source="{Binding ImageUrl}"
-                   Grid.Row="1"/>
+                   Grid.Row="1" />
 
         </Grid>
     </DataTemplate>
