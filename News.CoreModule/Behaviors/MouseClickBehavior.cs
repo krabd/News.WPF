@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
@@ -10,6 +11,15 @@ namespace News.CoreModule.Behaviors
         private FrameworkElement _parent;
         private Point _mouseStartPosition;
         private bool _isMouseDownNoMove;
+
+        public static readonly DependencyProperty MoveSensitivityProperty = DependencyProperty.Register(
+            nameof(MoveSensitivity), typeof(int), typeof(MouseClickBehavior), new PropertyMetadata(3));
+
+        public int MoveSensitivity
+        {
+            get => (int) GetValue(MoveSensitivityProperty);
+            set => SetValue(MoveSensitivityProperty, value);
+        }
 
         public static readonly DependencyProperty CommandProperty = DependencyProperty.Register(
             nameof(Command), typeof(ICommand), typeof(MouseClickBehavior), new PropertyMetadata(default(ICommand)));
@@ -44,15 +54,11 @@ namespace News.CoreModule.Behaviors
         {
             _isMouseDownNoMove = true;
 
-            Debug.WriteLine("OnMouseLeftButtonDown");
-
             _mouseStartPosition = e.GetPosition(_parent);
         }
 
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Debug.WriteLine("OnMouseLeftButtonUp");
-
             if (_isMouseDownNoMove && Command != null && Command.CanExecute(CommandParameter))
                 Command.Execute(CommandParameter);
 
@@ -64,12 +70,8 @@ namespace News.CoreModule.Behaviors
             if (!_isMouseDownNoMove) return;
 
             var diff = e.GetPosition(_parent) - _mouseStartPosition;
-            if (diff.X > 3 || diff.Y > 3)
-            {
-                Debug.WriteLine("Cancel OnMouseMove");
-
+            if (Math.Abs(diff.X) > MoveSensitivity || Math.Abs(diff.Y) > MoveSensitivity)
                 _isMouseDownNoMove = false;
-            }
         }
 
         protected override void OnDetaching()
