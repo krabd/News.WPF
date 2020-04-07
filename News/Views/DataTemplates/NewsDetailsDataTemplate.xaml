@@ -5,17 +5,15 @@
 
     <DataTemplate DataType="{x:Type viewModels:NewsDetailsViewModel}">
         <StackPanel>
-            <TextBlock
-                Text="Go to news"
-                TextWrapping="Wrap"
-                LineStackingStrategy="BlockLineHeight"
-                TextDecorations="Underline"
-                Cursor="Hand"
-                HorizontalAlignment="Left">
+            <TextBlock Text="Go to news"
+                       TextWrapping="Wrap"
+                       LineStackingStrategy="BlockLineHeight"
+                       TextDecorations="Underline"
+                       Cursor="Hand"
+                       HorizontalAlignment="Left">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
-                        <i:InvokeCommandAction
-                            Command="{Binding GoToNewsCommand}" />
+                        <i:InvokeCommandAction Command="{Binding GoToNewsCommand}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </TextBlock>
