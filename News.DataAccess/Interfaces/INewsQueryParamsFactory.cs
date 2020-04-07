@@ -4,12 +4,12 @@ namespace News.DataAccess.Interfaces
 {
     public interface INewsQueryParamsFactory
     {
-        string Create();
+        string Create(int pageSize);
 
-        string Create(int page);
+        string Create(int page, int pageSize);
 
-        string Create(int page, DateTime from);
+        string Create(int page, int pageSize, DateTime from);
 
-        string Create(int page, DateTime from, DateTime to);
+        string Create(int page, int pageSize, DateTime from, DateTime to);
     }
 }

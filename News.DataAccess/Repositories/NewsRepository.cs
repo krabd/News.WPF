@@ -16,12 +16,14 @@ namespace News.DataAccess.Repositories
         private readonly INewsQueryParamsFactory _queryParamsFactory;
         private readonly HttpClient _client;
         private readonly string _baseUrl;
+        private readonly int _pageSize;
 
-        public NewsRepository(INewsQueryParamsFactory queryParamsFactory, IHttpClientFactory httpClientFactory, string baseUrl, string apiKey)
+        public NewsRepository(INewsQueryParamsFactory queryParamsFactory, IHttpClientFactory httpClientFactory, string baseUrl, string apiKey, int pageSize)
         {
             _queryParamsFactory = queryParamsFactory;
             _client = httpClientFactory.CreateClient();
             _baseUrl = baseUrl;
+            _pageSize = pageSize;
 
             _client.DefaultRequestHeaders.Add("x-api-key", apiKey);
         }
@@ -31,8 +33,8 @@ namespace News.DataAccess.Repositories
             return Task.Run(async () =>
             {
                 var endpoint = "everything";
-                var queryParams = _queryParamsFactory.Create(1, DateTime.UtcNow.Date); 
-                //_queryParamsFactory.Create(1, DateTime.UtcNow.Date, DateTime.UtcNow.AddHours(-6));
+                var queryParams = _queryParamsFactory.Create(page, _pageSize, DateTime.UtcNow.Date); 
+                //_queryParamsFactory.Create(page, _pageSize, DateTime.UtcNow.Date, DateTime.UtcNow.AddHours(-6));
 
                 var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
                 var httpResponse = await _client.SendAsync(httpRequest, token);
@@ -59,7 +61,7 @@ namespace News.DataAccess.Repositories
             return Task.Run<IReadOnlyCollection<NewsModel>>(async () =>
             {
                 var endpoint = "everything";
-                var queryParams = _queryParamsFactory.Create(1, startDate.AddSeconds(1));
+                var queryParams = _queryParamsFactory.Create(1, _pageSize, startDate.AddSeconds(1));
 
                 var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
                 var httpResponse = await _client.SendAsync(httpRequest, token);

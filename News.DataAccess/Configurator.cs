@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Net.Http;
 using Microsoft.Extensions.DependencyInjection;
 using News.DataAccess.Interfaces;
@@ -19,7 +20,8 @@ namespace News.DataAccess
                 provider.Resolve<INewsQueryParamsFactory>(),
                 provider.Resolve<IHttpClientFactory>(),
                 ConfigurationManager.AppSettings.Get("newsBaseUrl"),
-                ConfigurationManager.AppSettings.Get("newsApiKey")));
+                ConfigurationManager.AppSettings.Get("newsApiKey"),
+                Convert.ToInt32(ConfigurationManager.AppSettings.Get("newsLoadingPageSize"))));
 
             services.AddTransient<ICurrencyExchangeRepository, CurrencyExchangeRepository>(provider => new CurrencyExchangeRepository(
                 provider.Resolve<IHttpClientFactory>(),

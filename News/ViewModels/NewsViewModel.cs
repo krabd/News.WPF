@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace News.ViewModels
     {
         private readonly INewsRepository _newsRepository;
         private readonly IUpdateNewsService _newsService;
+        private readonly int _pageSize;
 
         private int _totalCount;
 
@@ -40,6 +43,8 @@ namespace News.ViewModels
 
             News.CollectionChanged += OnNewsCollectionChanged;
             _newsService.NewsAdded += OnNewsAdded;
+
+            _pageSize = Convert.ToInt32(ConfigurationManager.AppSettings.Get("newsLoadingPageSize"));
         }
 
         public async Task InitializeAsync(CancellationToken token)
@@ -57,9 +62,17 @@ namespace News.ViewModels
             _newsService.Start(News.FirstOrDefault()?.PublishedDate ?? DateTime.Now);
         }
 
-        private void OnLoadNewPageAsync(int? itemsCount)
+        private async void OnLoadNewPageAsync(int? itemsCount)
         {
+            try
+            {
+                var diff = _totalCount - itemsCount;
 
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
         }
 
         private void OnNewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
