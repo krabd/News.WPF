@@ -13,26 +13,27 @@ namespace News.DataAccess.Repositories
 {
     public class NewsRepository : INewsRepository
     {
+        private readonly INewsQueryParamsFactory _queryParamsFactory;
         private readonly HttpClient _client;
         private readonly string _baseUrl;
 
-        public NewsRepository(IHttpClientFactory httpClientFactory, string baseUrl, string apiKey)
+        public NewsRepository(INewsQueryParamsFactory queryParamsFactory, IHttpClientFactory httpClientFactory, string baseUrl, string apiKey)
         {
+            _queryParamsFactory = queryParamsFactory;
             _client = httpClientFactory.CreateClient();
             _baseUrl = baseUrl;
 
             _client.DefaultRequestHeaders.Add("x-api-key", apiKey);
         }
 
-        public Task<IReadOnlyCollection<NewsModel>> GetNewsAsync(CancellationToken token)
+        public Task<NewsResult> GetNewsAsync(CancellationToken token, int page)
         {
-            return Task.Run<IReadOnlyCollection<NewsModel>>(async () =>
+            return Task.Run(async () =>
             {
                 var endpoint = "everything";
 
-                var queryParams = GetDefaultQueryParams();
-                queryParams.Add("from=" + DateTime.UtcNow.ToString("yyyy-MM-dd"));
-                queryParams.Add("to=" + DateTime.UtcNow.AddHours(-6).ToString("yyyy-MM-ddTHH:MM:ss"));
+                var queryParams = _queryParamsFactory.Create(1, DateTime.UtcNow.Date); 
+                //_queryParamsFactory.Create(1, DateTime.UtcNow.Date, DateTime.UtcNow.AddHours(-6));
 
                 var querystring = string.Join("&", queryParams.ToArray());
 
@@ -42,13 +43,17 @@ namespace News.DataAccess.Repositories
 
                 var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
 
-                return news.News.Select(i => new NewsModel
+                return new NewsResult
                 {
-                    Author = i.Author,
-                    Title = i.Title,
-                    Description = i.Description,
-                    PublishedDate = i.PublishedDate.ToLocalTime()
-                }).ToList();
+                    TotalCount = news.TotalCount,
+                    News = news.News.Select(i => new NewsModel
+                    {
+                        Author = i.Author,
+                        Title = i.Title,
+                        Description = i.Description,
+                        PublishedDate = i.PublishedDate.ToLocalTime()
+                    }).ToList()
+                };
             }, token);
         }
 
@@ -58,8 +63,7 @@ namespace News.DataAccess.Repositories
             {
                 var endpoint = "everything";
 
-                var queryParams = GetDefaultQueryParams();
-                queryParams.Add("from=" + startDate.AddSeconds(1).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss"));
+                var queryParams = _queryParamsFactory.Create(1, startDate.AddSeconds(1));
 
                 var querystring = string.Join("&", queryParams.ToArray());
 
@@ -77,17 +81,6 @@ namespace News.DataAccess.Repositories
                     PublishedDate = i.PublishedDate.ToLocalTime()
                 }).ToList();
             }, token);
-        }
-
-        private List<string> GetDefaultQueryParams()
-        {
-            return new List<string>
-            {
-                "q=" + "world",
-                "sortBy=" + "publishedAt",
-                "page=" + 1,
-                "pageSize=" + 20
-            };
         }
     }
 }

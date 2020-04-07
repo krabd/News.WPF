@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Models\CurrencyExchangeModel.cs" />
     <Compile Include="Models\NewsModel.cs" />
+    <Compile Include="Models\NewsResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -19,6 +19,8 @@ namespace News.ViewModels
         private readonly INewsRepository _newsRepository;
         private readonly IUpdateNewsService _newsService;
 
+        private int _totalCount;
+
         public IEnumerable<NewsItemViewModel> OrderedNews => News.OrderByDescending(i => i.PublishedDate);
 
         public ObservableCollection<NewsItemViewModel> News { get; } = new ObservableCollection<NewsItemViewModel>();
@@ -38,11 +40,13 @@ namespace News.ViewModels
         {
             _newsService.Stop();
 
-            var news = await _newsRepository.GetNewsAsync(token);
+            var news = await _newsRepository.GetNewsAsync(token, 1);
             token.ThrowIfCancellationRequested();
 
+            _totalCount = news.TotalCount;
+
             News.Clear();
-            AddNews(news);
+            AddNews(news.News);
 
             _newsService.Start(News.FirstOrDefault()?.PublishedDate ?? DateTime.Now);
         }

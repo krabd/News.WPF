@@ -100,7 +100,9 @@
   <ItemGroup>
     <Compile Include="Configurator.cs" />
     <Compile Include="Interfaces\ICurrencyExchangeRepository.cs" />
+    <Compile Include="Interfaces\INewsQueryParamsFactory.cs" />
     <Compile Include="Interfaces\INewsRepository.cs" />
+    <Compile Include="NewsQueryParamsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CurrencyExchangeRepository.cs" />
     <Compile Include="Repositories\NewsRepository.cs" />

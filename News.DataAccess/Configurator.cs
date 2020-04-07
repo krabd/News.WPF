@@ -13,7 +13,10 @@ namespace News.DataAccess
         {
             services.AddHttpClient();
 
+            services.AddTransient<INewsQueryParamsFactory, NewsQueryParamsFactory>();
+
             services.AddTransient<INewsRepository, NewsRepository>(provider => new NewsRepository(
+                provider.Resolve<INewsQueryParamsFactory>(),
                 provider.Resolve<IHttpClientFactory>(),
                 ConfigurationManager.AppSettings.Get("newsBaseUrl"),
                 ConfigurationManager.AppSettings.Get("newsApiKey")));
