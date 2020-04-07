@@ -86,6 +86,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IUpdateNewsService.cs" />
+    <Compile Include="Services\UpdateNewsService.cs" />
     <Compile Include="StartupService.cs" />
     <Compile Include="ViewModels\CurrencyExchangeViewModel.cs" />
     <Compile Include="ViewModels\Items\NewsItemViewModel.cs" />

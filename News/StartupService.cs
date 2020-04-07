@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using News.CoreModule;
 using News.DataAccess;
+using News.Interfaces;
+using News.Services;
 using News.ViewModels;
 
 namespace News
@@ -11,6 +13,7 @@ namespace News
         public void Configure(IServiceCollection services)
         {
             ConfigureViewModels(services);
+            ConfigureServices(services);
             ConfigureModules(services);
         }
 
@@ -21,6 +24,11 @@ namespace News
             services.AddTransient<WorkspaceViewModel>();
             services.AddTransient<NewsViewModel>();
             services.AddTransient<CurrencyExchangeViewModel>();
+        }
+
+        private void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<IUpdateNewsService, UpdateNewsService>();
         }
 
         private void ConfigureModules(IServiceCollection services)
