@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels\CurrencyExchange\CurrencyExchangeEntity.cs" />
-    <Compile Include="EntityModels\CurrencyExchange\CurrencyExchangeHistoryResponseEntity.cs" />
     <Compile Include="EntityModels\CurrencyExchange\CurrencyExchangeResponseEntity.cs" />
     <Compile Include="EntityModels\News\NewsEntity.cs" />
     <Compile Include="EntityModels\News\NewsResponseEntity.cs" />

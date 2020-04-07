@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -13,51 +12,46 @@ namespace News.DataAccess.Repositories
 {
     public class NewsRepository : INewsRepository
     {
-        private string BASE_URL = "https://newsapi.org/v2/";
+        private readonly HttpClient _client;
+        private readonly string _baseUrl;
 
-        private string _apiKey;
-
-        public void SetApiKey(string apiKey)
+        public NewsRepository(IHttpClientFactory httpClientFactory, string baseUrl, string apiKey)
         {
-            _apiKey = apiKey;
+            _client = httpClientFactory.CreateClient();
+
+            _baseUrl = baseUrl;
+
+            _client.DefaultRequestHeaders.Add("x-api-key", apiKey);
         }
 
         public Task<IReadOnlyCollection<NewsModel>> GetNewsAsync(CancellationToken token)
         {
             return Task.Run<IReadOnlyCollection<NewsModel>>(async () =>
             {
-                if (string.IsNullOrEmpty(_apiKey))
-                    throw new ArgumentException("ApiKey is empty");
+                var endpoint = "top-headlines";
 
-                using (var client = new HttpClient())
+                var queryParams = new List<string>
                 {
-                    client.DefaultRequestHeaders.Add("x-api-key", _apiKey);
+                    "language=" + "ru",
+                    "page=" + 1,
+                    "pageSize=" + 10
+                };
 
-                    var endpoint = "top-headlines";
+                var querystring = string.Join("&", queryParams.ToArray());
 
-                    var queryParams = new List<string>
-                    {
-                        "language=" + "ru", 
-                        "page=" + 1, 
-                        "pageSize=" + 10
-                    };
+                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + querystring);
+                var httpResponse = await _client.SendAsync(httpRequest, token);
+                var json = await httpResponse.Content.ReadAsStringAsync();
 
-                    var querystring = string.Join("&", queryParams.ToArray());
+                var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
 
-                    var httpRequest = new HttpRequestMessage(HttpMethod.Get, BASE_URL + endpoint + "?" + querystring);
-                    var httpResponse = await client.SendAsync(httpRequest, token);
-                    var json = await httpResponse.Content.ReadAsStringAsync();
-
-                    var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
-
-                    return news.News.Select(i => new NewsModel
-                    {
-                        Author = i.Author,
-                        Title = i.Title,
-                        Description = i.Description,
-                        PublishedDate = i.PublishedDate
-                    }).ToList();
-                }
+                return news.News.Select(i => new NewsModel
+                {
+                    Author = i.Author,
+                    Title = i.Title,
+                    Description = i.Description,
+                    PublishedDate = i.PublishedDate
+                }).ToList();
             }, token);
         }
     }
