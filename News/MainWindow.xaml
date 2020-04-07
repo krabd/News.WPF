@@ -14,10 +14,6 @@
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}">
 
     <Grid>
-        <i:Interaction.Behaviors>
-            <behaviors:MvvmWindowBehavior />
-        </i:Interaction.Behaviors>
-
         <Border Background="DeepSkyBlue"
                 BorderBrush="OrangeRed"
                 BorderThickness="5"

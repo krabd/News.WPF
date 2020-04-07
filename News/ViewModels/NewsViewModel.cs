@@ -21,7 +21,7 @@ using Prism.Commands;
 
 namespace News.ViewModels
 {
-    public class NewsViewModel : ViewModelBase, INotifyAboutNews
+    public class NewsViewModel : ViewModelBase, INotifyAboutNews, IDisposable
     {
         private readonly INewsRepository _newsRepository;
         private readonly IUpdateNewsService _newsService;
@@ -150,6 +150,12 @@ namespace News.ViewModels
 
                 News.AddRange(unique);
             });
+        }
+
+        public void Dispose()
+        {
+            News.CollectionChanged -= OnNewsCollectionChanged;
+            _newsService.NewsAdded -= OnNewsAdded;
         }
     }
 }

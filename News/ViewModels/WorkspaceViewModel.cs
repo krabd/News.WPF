@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using News.CoreModule.Enums;
 using News.CoreModule.Interfaces;
 using News.CoreModule.ViewModels;
 using News.Utils;
@@ -11,7 +12,7 @@ using Prism.Commands;
 
 namespace News.ViewModels
 {
-    public class WorkspaceViewModel : ViewModelBase
+    public class WorkspaceViewModel : ViewModelBase, IWorkspace
     {
         private CancellationTokenSource _cts;
 
