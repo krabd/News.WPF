@@ -87,6 +87,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Behaviors\AddNewsNotificationBehavior.cs" />
+    <Compile Include="Behaviors\ListViewScrollToBottomDetectBehavior.cs" />
     <Compile Include="Interfaces\INotifyAboutNews.cs" />
     <Compile Include="Interfaces\IUpdateNewsService.cs" />
     <Compile Include="Services\UpdateNewsService.cs" />

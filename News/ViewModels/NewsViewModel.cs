@@ -5,12 +5,14 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using News.CoreModule.ViewModels;
 using News.DataAccess.Interfaces;
 using News.Domain.Models;
 using News.Interfaces;
 using News.Utils;
 using News.ViewModels.Items;
+using Prism.Commands;
 
 namespace News.ViewModels
 {
@@ -27,10 +29,14 @@ namespace News.ViewModels
 
         public event EventHandler<IReadOnlyCollection<NewsModel>> NewsAdded;
 
+        public ICommand LoadNewPageCommand { get; }
+
         public NewsViewModel(INewsRepository newsRepository, IUpdateNewsService newsService)
         {
             _newsRepository = newsRepository;
             _newsService = newsService;
+
+            LoadNewPageCommand = new DelegateCommand<int?>(OnLoadNewPageAsync);
 
             News.CollectionChanged += OnNewsCollectionChanged;
             _newsService.NewsAdded += OnNewsAdded;
@@ -49,6 +55,11 @@ namespace News.ViewModels
             AddNews(news.News);
 
             _newsService.Start(News.FirstOrDefault()?.PublishedDate ?? DateTime.Now);
+        }
+
+        private void OnLoadNewPageAsync(int? itemsCount)
+        {
+
         }
 
         private void OnNewsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
