@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Interactivity;
+using News.Controls.Controls;
 using News.Domain.Models;
 using News.Interfaces;
+using News.Utils;
 
 namespace News.Behaviors
 {
-    public class AddNewsNotificationBehavior : Behavior<UIElement>
+    public class AddNewsNotificationBehavior : Behavior<NotificationControl>
     {
         public static readonly DependencyProperty NotifyAboutNewsProperty = DependencyProperty.Register(
             nameof(NotifyAboutNews), typeof(INotifyAboutNews), typeof(AddNewsNotificationBehavior), new PropertyMetadata(default(INotifyAboutNews), OnNotifyAboutNewsChanged));
@@ -39,7 +40,11 @@ namespace News.Behaviors
 
         private void OnNotify(object sender, IReadOnlyCollection<NewsModel> e)
         {
-
+            Tools.DispatchedInvoke(() =>
+            {
+                AssociatedObject.Message = $"Added {e.Count} news";
+                AssociatedObject.Open();
+            });
         }
 
         protected override void OnDetaching()

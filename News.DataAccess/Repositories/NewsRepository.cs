@@ -32,7 +32,7 @@ namespace News.DataAccess.Repositories
 
                 var queryParams = GetDefaultQueryParams();
                 queryParams.Add("from=" + DateTime.UtcNow.ToString("yyyy-MM-dd"));
-                //queryParams.Add("to=" + DateTime.UtcNow.AddHours(-6).ToString("yyyy-MM-ddTHH:MM:ss"));
+                queryParams.Add("to=" + DateTime.UtcNow.AddHours(-6).ToString("yyyy-MM-ddTHH:MM:ss"));
 
                 var querystring = string.Join("&", queryParams.ToArray());
 
@@ -59,7 +59,7 @@ namespace News.DataAccess.Repositories
                 var endpoint = "everything";
 
                 var queryParams = GetDefaultQueryParams();
-                queryParams.Add("from=" + startDate.ToUniversalTime().AddSeconds(1).ToString("yyyy-MM-ddTHH:MM:ss"));
+                queryParams.Add("from=" + startDate.AddSeconds(1).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss"));
 
                 var querystring = string.Join("&", queryParams.ToArray());
 

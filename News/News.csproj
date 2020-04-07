@@ -150,6 +150,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\News.Controls\News.Controls.csproj">
+      <Project>{03ea2bfb-46d0-4ffc-b1ce-bffa95ebcf92}</Project>
+      <Name>News.Controls</Name>
+    </ProjectReference>
     <ProjectReference Include="..\News.CoreModule\News.CoreModule.csproj">
       <Project>{3ddf4411-1684-4cb0-b4e9-924794b75cad}</Project>
       <Name>News.CoreModule</Name>

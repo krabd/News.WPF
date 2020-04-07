@@ -2,7 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:News.ViewModels"
                     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-                    xmlns:behaviors="clr-namespace:News.Behaviors">
+                    xmlns:behaviors="clr-namespace:News.Behaviors"
+                    xmlns:controls="clr-namespace:News.Controls;assembly=News.Controls"
+                    xmlns:controls1="clr-namespace:News.Controls.Controls;assembly=News.Controls">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="NewsDataTemplate.xaml" />
@@ -38,9 +40,12 @@
                         Width="200" />
             </StackPanel>
 
-            <i:Interaction.Behaviors>
-                <behaviors:AddNewsNotificationBehavior NotifyAboutNews="{Binding News}"/>
-            </i:Interaction.Behaviors>
+            <controls1:NotificationControl HorizontalAlignment="Center"
+                                          VerticalAlignment="Center">
+                <i:Interaction.Behaviors>
+                    <behaviors:AddNewsNotificationBehavior NotifyAboutNews="{Binding News}"/>
+                </i:Interaction.Behaviors>
+            </controls1:NotificationControl>
         </Grid>
     </DataTemplate>
 

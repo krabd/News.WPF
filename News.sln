@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Domain", "News.Domain\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Entity", "News.Entity\News.Entity.csproj", "{0DED067A-9821-46D3-9A79-B7DB0B30B448}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News.Controls", "News.Controls\News.Controls.csproj", "{03EA2BFB-46D0-4FFC-B1CE-BFFA95EBCF92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0DED067A-9821-46D3-9A79-B7DB0B30B448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DED067A-9821-46D3-9A79-B7DB0B30B448}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DED067A-9821-46D3-9A79-B7DB0B30B448}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03EA2BFB-46D0-4FFC-B1CE-BFFA95EBCF92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03EA2BFB-46D0-4FFC-B1CE-BFFA95EBCF92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03EA2BFB-46D0-4FFC-B1CE-BFFA95EBCF92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03EA2BFB-46D0-4FFC-B1CE-BFFA95EBCF92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
