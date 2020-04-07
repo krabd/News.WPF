@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Microsoft.Extensions.DependencyInjection;
 using News.CoreModule.Interfaces;
 using News.CoreModule.ViewModels;
 using News.Utils.Extensions;
@@ -24,9 +25,11 @@ namespace News.ViewModels
 
         private void OnStart()
         {
-            var workspace = _provider.Resolve<WorkspaceViewModel>();
+            var scope = _provider.CreateScope();
+            var workspace = scope.ServiceProvider.Resolve<WorkspaceViewModel>();
             workspace.InitializeAsync();
             WindowService.Show(workspace, "Hot news 2020");
+            //TODO: Dispose scope when workspace closed
         }
     }
 }
