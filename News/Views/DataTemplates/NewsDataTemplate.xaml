@@ -3,7 +3,7 @@
                     xmlns:viewModels="clr-namespace:News.ViewModels">
 
     <DataTemplate DataType="{x:Type viewModels:NewsViewModel}" x:Key="NewsDataTemplate">
-        <ListView ItemsSource="{Binding News}"
+        <ListView ItemsSource="{Binding OrderedNews}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListView.ItemTemplate>
                 <DataTemplate>
