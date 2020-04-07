@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using News.CoreModule.Enums;
 using News.CoreModule.Interfaces;
 using News.CoreModule.ViewModels;
 using News.Utils;
