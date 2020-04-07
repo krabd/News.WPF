@@ -67,6 +67,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\DragBehavior.cs" />
+    <Compile Include="Behaviors\MouseClickBehavior.cs" />
     <Compile Include="Behaviors\MvvmWindowBehavior.cs" />
     <Compile Include="Configurator.cs" />
     <Compile Include="Enums\NotificationResult.cs" />

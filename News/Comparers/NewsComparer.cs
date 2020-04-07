@@ -21,7 +21,7 @@ namespace News.Comparers
 
         public int GetHashCode(NewsItemViewModel obj)
         {
-            return obj.Url.GetHashCode() ^ obj.Title.GetHashCode();
+            return obj.Title.GetHashCode() ^ obj.PublishedDate.GetHashCode();
         }
     }
 }

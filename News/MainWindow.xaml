@@ -18,8 +18,23 @@
             <behaviors:MvvmWindowBehavior />
         </i:Interaction.Behaviors>
 
-        <Button Content="Start!"
-                Command="{Binding StartCommand}" />
+        <Border Background="DeepSkyBlue"
+                BorderBrush="OrangeRed"
+                BorderThickness="5"
+                Cursor="Hand"
+                Width="100"
+                Height="50">
+            <TextBlock Text="Click ME!"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="ForestGreen"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+            <i:Interaction.Behaviors>
+                <behaviors:DragBehavior />
+                <behaviors:MouseClickBehavior Command="{Binding StartCommand}"/>
+            </i:Interaction.Behaviors>
+        </Border>
     </Grid>
 
 </Window>
