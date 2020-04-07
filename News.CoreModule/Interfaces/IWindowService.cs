@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using News.CoreModule.Enums;
 
 namespace News.CoreModule.Interfaces
 {
@@ -7,5 +8,7 @@ namespace News.CoreModule.Interfaces
         void Show(INotifyPropertyChanged dataContext, string title);
 
         bool? ShowDialog(INotifyPropertyChanged dataContext, string title);
+
+        bool? ShowMessage(string message, string title, NotificationResult resultType = NotificationResult.YesNo);
     }
 }

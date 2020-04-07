@@ -48,20 +48,5 @@ namespace News.Utils.Helpers
 
             return parent;
         }
-
-        private static IEnumerable<DependencyObject> GetLogicalParents(DependencyObject element)
-        {
-            while (true)
-            {
-                var parent = GetLogicalParent(element);
-                var dependencyObject = parent;
-                element = parent;
-
-                if (dependencyObject == null)
-                    break;
-
-                yield return element;
-            }
-        }
     }
 }

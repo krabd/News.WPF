@@ -3,8 +3,11 @@ using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using News.CoreModule.Enums;
+using News.CoreModule.Interfaces;
 using News.CoreModule.ViewModels;
 using News.Utils;
+using News.Utils.Helpers;
 using Prism.Commands;
 
 namespace News.ViewModels
@@ -12,6 +15,8 @@ namespace News.ViewModels
     public class WorkspaceViewModel : ViewModelBase
     {
         private CancellationTokenSource _cts;
+
+        public IWindowService WindowService { get; set; }
 
         public NewsViewModel News { get; }
 
@@ -51,12 +56,14 @@ namespace News.ViewModels
 
         private void OnShutdown()
         {
-
+            if (WindowService.ShowMessage($"Do you really want to shutdown your computer?", "Warning") ?? false)
+                ControlPCHelper.ShutdownPC();
         }
 
         private void OnLogout()
         {
-
+            if (WindowService.ShowMessage($"Do you really want to logout?", "Warning") ?? false)
+                ControlPCHelper.LogOut();
         }
     }
 }
