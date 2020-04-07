@@ -18,7 +18,6 @@ namespace News.DataAccess.Repositories
         public NewsRepository(IHttpClientFactory httpClientFactory, string baseUrl, string apiKey)
         {
             _client = httpClientFactory.CreateClient();
-
             _baseUrl = baseUrl;
 
             _client.DefaultRequestHeaders.Add("x-api-key", apiKey);

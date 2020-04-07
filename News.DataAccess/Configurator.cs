@@ -13,11 +13,13 @@ namespace News.DataAccess
         {
             services.AddHttpClient();
 
-            services.AddTransient<INewsRepository, NewsRepository>(provider => new NewsRepository(provider.Resolve<IHttpClientFactory>(),
+            services.AddTransient<INewsRepository, NewsRepository>(provider => new NewsRepository(
+                provider.Resolve<IHttpClientFactory>(),
                 ConfigurationManager.AppSettings.Get("newsBaseUrl"),
                 ConfigurationManager.AppSettings.Get("newsApiKey")));
 
-            services.AddTransient<ICurrencyExchangeRepository, CurrencyExchangeRepository>(provider => new CurrencyExchangeRepository(provider.Resolve<IHttpClientFactory>(),
+            services.AddTransient<ICurrencyExchangeRepository, CurrencyExchangeRepository>(provider => new CurrencyExchangeRepository(
+                provider.Resolve<IHttpClientFactory>(),
                 ConfigurationManager.AppSettings.Get("currencyExchangeBaseUrl")));
 
             return services;

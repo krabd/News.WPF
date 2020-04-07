@@ -4,7 +4,6 @@
     {
         public float Usd { get; set; }
 
-
         public float Eur { get; set; }
     }
 }

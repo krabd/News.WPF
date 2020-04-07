@@ -11,14 +11,12 @@ namespace News.DataAccess.Repositories
 {
     public class CurrencyExchangeRepository : ICurrencyExchangeRepository
     {
-        private readonly string _baseUrl;
-
         private readonly HttpClient _client;
+        private readonly string _baseUrl;
 
         public CurrencyExchangeRepository(IHttpClientFactory httpClientFactory, string baseUrl)
         {
             _client = httpClientFactory.CreateClient();
-
             _baseUrl = baseUrl;
         }
 
