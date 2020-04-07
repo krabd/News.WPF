@@ -6,34 +6,51 @@ namespace News.DataAccess
 {
     public class NewsQueryParamsFactory : INewsQueryParamsFactory
     {
-        public List<string> Create()
+        public string Create()
         {
-            return new List<string>
+            var queryParams = new List<string>
             {
                 "q=" + "world",
                 "sortBy=" + "publishedAt"
             };
+
+            return string.Join("&", queryParams.ToArray());
         }
 
-        public List<string> Create(int page)
+        public string Create(int page)
         {
-            var queryParams = Create();
-            queryParams.Add("page=" + page);
-            return queryParams;
+            var queryParams = new List<string>
+            {
+                "q=" + "world", 
+                "sortBy=" + "publishedAt",
+                "page=" + page
+            };
+            return string.Join("&", queryParams.ToArray());
         }
 
-        public List<string> Create(int page, DateTime from)
+        public string Create(int page, DateTime from)
         {
-            var queryParams = Create(page);
-            queryParams.Add("from=" + from.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss"));
-            return queryParams;
+            var queryParams = new List<string>
+            {
+                "q=" + "world",
+                "sortBy=" + "publishedAt",
+                "page=" + page,
+                "from=" + from.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss")
+            };
+            return string.Join("&", queryParams.ToArray());
         }
 
-        public List<string> Create(int page, DateTime from, DateTime to)
+        public string Create(int page, DateTime from, DateTime to)
         {
-            var queryParams = Create(page, from);
-            queryParams.Add("to=" + to.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss"));
-            return queryParams;
+            var queryParams = new List<string>
+            {
+                "q=" + "world",
+                "sortBy=" + "publishedAt",
+                "page=" + page,
+                "from=" + from.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss"),
+                "to=" + to.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss")
+            };
+            return string.Join("&", queryParams.ToArray());
         }
     }
 }

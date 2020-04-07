@@ -31,13 +31,10 @@ namespace News.DataAccess.Repositories
             return Task.Run(async () =>
             {
                 var endpoint = "everything";
-
                 var queryParams = _queryParamsFactory.Create(1, DateTime.UtcNow.Date); 
                 //_queryParamsFactory.Create(1, DateTime.UtcNow.Date, DateTime.UtcNow.AddHours(-6));
 
-                var querystring = string.Join("&", queryParams.ToArray());
-
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + querystring);
+                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
                 var httpResponse = await _client.SendAsync(httpRequest, token);
                 var json = await httpResponse.Content.ReadAsStringAsync();
 
@@ -62,12 +59,9 @@ namespace News.DataAccess.Repositories
             return Task.Run<IReadOnlyCollection<NewsModel>>(async () =>
             {
                 var endpoint = "everything";
-
                 var queryParams = _queryParamsFactory.Create(1, startDate.AddSeconds(1));
 
-                var querystring = string.Join("&", queryParams.ToArray());
-
-                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + querystring);
+                var httpRequest = new HttpRequestMessage(HttpMethod.Get, _baseUrl + endpoint + "?" + queryParams);
                 var httpResponse = await _client.SendAsync(httpRequest, token);
                 var json = await httpResponse.Content.ReadAsStringAsync();
 
