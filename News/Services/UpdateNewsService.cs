@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using News.DataAccess.Interfaces;
 using News.Domain.Models;
 using News.Interfaces;
+using News.Utils.Helpers;
 
 namespace News.Services
 {
@@ -47,10 +48,16 @@ namespace News.Services
                         var news = await _repository.GetNewsAsync(_lastDate, default);
                         token.ThrowIfCancellationRequested();
 
-                        if (!news.Any()) continue;
+                        if (news.Value == Status.Fail)
+                        {
+                            Debug.WriteLine(news.Message);
+                            continue;
+                        }
 
-                        _lastDate = news.OrderByDescending(i => i.PublishedDate).FirstOrDefault()?.PublishedDate ?? DateTime.Now;
-                        OnNewsAdded(news);
+                        if (!news.Model.Any()) continue;
+
+                        _lastDate = news.Model.OrderByDescending(i => i.PublishedDate).FirstOrDefault()?.PublishedDate ?? DateTime.Now;
+                        OnNewsAdded(news.Model);
                     }
                 }
                 catch (Exception e)

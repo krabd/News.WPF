@@ -63,6 +63,7 @@
     <Compile Include="Helpers\ChildOfTypeHelper.cs" />
     <Compile Include="Helpers\ControlPCHelper.cs" />
     <Compile Include="Helpers\ParentOfTypeHelper.cs" />
+    <Compile Include="Helpers\Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools.cs" />
   </ItemGroup>

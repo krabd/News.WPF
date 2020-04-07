@@ -8,6 +8,9 @@ namespace News.Entity.EntityModels.News
         [JsonProperty("status")]
         public string Status { get; set; }
 
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
         [JsonProperty("totalResults")]
         public int TotalCount { get; set; }
 

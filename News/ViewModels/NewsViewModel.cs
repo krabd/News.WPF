@@ -14,6 +14,7 @@ using News.DataAccess.Interfaces;
 using News.Domain.Models;
 using News.Interfaces;
 using News.Utils;
+using News.Utils.Helpers;
 using News.ViewModels.Items;
 using Prism.Commands;
 
@@ -58,12 +59,19 @@ namespace News.ViewModels
             var news = await _newsRepository.GetNewsAsync(token, 1);
             token.ThrowIfCancellationRequested();
 
-            _totalCount = news.TotalCount;
+            if (news.Value == Status.Fail)
+            {
+                Debug.WriteLine(news.Message);
+            }
+            else
+            {
+                _totalCount = news.Model.TotalCount;
 
-            News.Clear();
-            AddNews(news.News);
+                News.Clear();
+                AddNews(news.Model.News);
 
-            _newsService.Start(News.FirstOrDefault()?.PublishedDate ?? DateTime.Now);
+                _newsService.Start(News.FirstOrDefault()?.PublishedDate ?? DateTime.Now);
+            }
         }
 
         private async void OnLoadNewPageAsync(int? itemsCount)
@@ -76,9 +84,16 @@ namespace News.ViewModels
                 var loadedPageCount = (int)Math.Truncate((decimal)itemsCount / _pageSize);
                 var news = await _newsRepository.GetNewsAsync(default, loadedPageCount + 1);
 
-                _totalCount = news.TotalCount;
+                if (news.Value == Status.Fail)
+                {
+                    Debug.WriteLine(news.Message);
+                }
+                else
+                {
+                    _totalCount = news.Model.TotalCount;
 
-                AddNews(news.News);
+                    AddNews(news.Model.News);
+                }
             }
             catch (Exception e)
             {

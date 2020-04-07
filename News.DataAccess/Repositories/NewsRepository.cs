@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using News.DataAccess.Interfaces;
 using News.Domain.Models;
 using News.Entity.EntityModels.News;
+using News.Utils.Helpers;
 using Newtonsoft.Json;
 
 namespace News.DataAccess.Repositories
@@ -28,7 +29,7 @@ namespace News.DataAccess.Repositories
             _client.DefaultRequestHeaders.Add("x-api-key", apiKey);
         }
 
-        public Task<NewsResult> GetNewsAsync(CancellationToken token, int page)
+        public Task<Result<Status, NewsResult>> GetNewsAsync(CancellationToken token, int page)
         {
             return Task.Run(async () =>
             {
@@ -42,7 +43,10 @@ namespace News.DataAccess.Repositories
 
                 var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
 
-                return new NewsResult
+                if (string.Equals(news.Status, "error"))
+                    return new Result<Status, NewsResult>(Status.Fail, message: news.Message);
+
+                return new Result<Status, NewsResult>(Status.Ok, new NewsResult
                 {
                     TotalCount = news.TotalCount,
                     News = news.News.Select(i => new NewsModel
@@ -53,13 +57,13 @@ namespace News.DataAccess.Repositories
                         Url = i.Url,
                         PublishedDate = i.PublishedDate.ToLocalTime()
                     }).ToList()
-                };
+                });
             }, token);
         }
 
-        public Task<IReadOnlyCollection<NewsModel>> GetNewsAsync(DateTime startDate, CancellationToken token)
+        public Task<Result<Status, IReadOnlyCollection<NewsModel>>> GetNewsAsync(DateTime startDate, CancellationToken token)
         {
-            return Task.Run<IReadOnlyCollection<NewsModel>>(async () =>
+            return Task.Run(async () =>
             {
                 var endpoint = "everything";
                 var queryParams = _queryParamsFactory.Create(1, _pageSize, startDate.AddSeconds(1));
@@ -70,14 +74,17 @@ namespace News.DataAccess.Repositories
 
                 var news = JsonConvert.DeserializeObject<NewsResponseEntity>(json);
 
-                return news.News.Select(i => new NewsModel
+                if (string.Equals(news.Status, "error"))
+                    return new Result<Status, IReadOnlyCollection<NewsModel>>(Status.Fail, message: news.Message);
+
+                return new Result<Status, IReadOnlyCollection<NewsModel>>(Status.Ok, news.News.Select(i => new NewsModel
                 {
                     Author = i.Author,
                     Title = i.Title,
                     Description = i.Description,
                     Url = i.Url,
                     PublishedDate = i.PublishedDate.ToLocalTime()
-                }).ToList();
+                }).ToList());
             }, token);
         }
     }
