@@ -4,8 +4,6 @@
 
     <Style TargetType="{x:Type controls:NotificationControl}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Background" Value="#609DFF" />
-        <Setter Property="Foreground" Value="White" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:NotificationControl}">

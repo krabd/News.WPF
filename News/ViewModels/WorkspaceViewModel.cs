@@ -16,11 +16,11 @@ namespace News.ViewModels
     {
         private CancellationTokenSource _cts;
 
-        public IWindowService WindowService { get; set; }
-
         public NewsViewModel News { get; }
 
         public CurrencyExchangeViewModel CurrencyExchange { get; }
+
+        public IWindowService WindowService { get; set; }
 
         public ICommand ShutdownCommand { get; }
 

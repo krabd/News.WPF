@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
 
         <ResourceDictionary Source="Styles/TextBlockStyles.xaml" />
+        <ResourceDictionary Source="Styles/TabControlStyles.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 

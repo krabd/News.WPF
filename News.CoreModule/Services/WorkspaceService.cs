@@ -13,11 +13,7 @@ namespace News.CoreModule.Services
 {
     public class WorkspaceService : IWorkspaceService
     {
-        private readonly ConcurrentDictionary<Type, (Window window, IServiceScope scope)> _workspace =
-            new ConcurrentDictionary<Type, (Window window, IServiceScope scope)>();
-
-        private readonly ConcurrentDictionary<Window, IServiceScope> _independenceWorkspace =
-            new ConcurrentDictionary<Window, IServiceScope>();
+        private readonly ConcurrentDictionary<Window, IServiceScope> _workspace = new ConcurrentDictionary<Window, IServiceScope>();
 
         private readonly IServiceProvider _serviceProvider;
 
@@ -28,48 +24,19 @@ namespace News.CoreModule.Services
 
         public void OpenWorkspace<T>(string title) where T : IWorkspace
         {
-            try
+            Tools.DispatchedInvoke(() =>
             {
-                Tools.DispatchedInvoke(() =>
-                {
-                    if (_workspace.ContainsKey(typeof(T)))
-                    {
-                        _workspace.TryGetValue(typeof(T), out var w);
-                        Activate(w.window);
-                    }
-                    else
-                    {
-                        var (window, scope) = (CreateWindow(typeof(T)), _serviceProvider.CreateScope());
-                        if (_workspace.TryAdd(typeof(T), (window, scope)))
-                        {
-                            CreateAndInitializeWorkspace(window, () => scope.ServiceProvider.Resolve<T>(), title);
-                        }
-                    }
-                });
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-        }
-
-        public void OpenIndependenceWorkspace<T>(string title) where T : IWorkspace
-        {
-            try
-            {
-                Tools.DispatchedInvoke(() =>
+                try
                 {
                     var (window, scope) = (CreateWindow(typeof(T)), _serviceProvider.CreateScope());
-                    if (_independenceWorkspace.TryAdd(window, scope))
-                    {
+                    if (_workspace.TryAdd(window, scope))
                         CreateAndInitializeWorkspace(window, () => scope.ServiceProvider.Resolve<T>(), title);
-                    }
-                });
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            });
         }
 
         private Window CreateWindow(Type type)
@@ -82,16 +49,6 @@ namespace News.CoreModule.Services
 
             window.Closed += OnWindowClosed;
             return window;
-        }
-
-        private void Activate(Window window)
-        {
-            if (window.IsActive) return;
-
-            if (window.WindowState == WindowState.Minimized)
-                window.WindowState = WindowState.Normal;
-
-            window.Activate();
         }
 
         private void CreateAndInitializeWorkspace<T>(Window window, Func<T> createWorkspaceFunc, string title) where T : IWorkspace
@@ -108,9 +65,7 @@ namespace News.CoreModule.Services
             var window = (Window) sender;
             window.Closed -= OnWindowClosed;
 
-            if (_workspace.TryRemove(window.DataContext.GetType(), out var w))
-                w.scope?.Dispose();
-            else if (_independenceWorkspace.TryRemove(window, out var scope))
+            if (_workspace.TryRemove(window, out var scope))
                 scope?.Dispose();
         }
     }

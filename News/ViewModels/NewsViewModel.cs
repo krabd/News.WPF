@@ -32,11 +32,11 @@ namespace News.ViewModels
         private int _totalCount;
         private NewsItemViewModel _selectedNews;
 
-        public IWindowService WindowService { get; set; }
-
         public IEnumerable<NewsItemViewModel> OrderedNews => News.OrderByDescending(i => i.PublishedDate);
 
         public ObservableCollection<NewsItemViewModel> News { get; } = new ObservableCollection<NewsItemViewModel>();
+
+        public IWindowService WindowService { get; set; }
 
         public NewsItemViewModel SelectedNews
         {

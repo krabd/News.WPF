@@ -12,9 +12,7 @@
 
             <TextBlock Style="{StaticResource HyperLinkTextBlockStyle}"
                        Text="Go to news"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Height="80">
+                       HorizontalAlignment="Center">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
                         <i:InvokeCommandAction Command="{Binding GoToNewsCommand}" />
@@ -23,7 +21,8 @@
             </TextBlock>
 
             <Image Source="{Binding ImageUrl}"
-                   Grid.Row="1" />
+                   Grid.Row="1"
+                   Margin="10"/>
 
         </Grid>
     </DataTemplate>

@@ -13,7 +13,7 @@ namespace News.Services
 {
     public class UpdateNewsService : IUpdateNewsService
     {
-        private const int REQUEST_NEWS_TIMEOUT_SECONDS = 10;
+        private const int REQUEST_NEWS_TIMEOUT_MINUTES = 5;
 
         private readonly INewsRepository _repository;
 
@@ -42,7 +42,7 @@ namespace News.Services
                     while (!token.IsCancellationRequested)
                     {
 
-                        await Task.Delay(TimeSpan.FromSeconds(REQUEST_NEWS_TIMEOUT_SECONDS));
+                        await Task.Delay(TimeSpan.FromMinutes(REQUEST_NEWS_TIMEOUT_MINUTES));
                         token.ThrowIfCancellationRequested();
 
                         var news = await _repository.GetNewsAsync(_lastDate);

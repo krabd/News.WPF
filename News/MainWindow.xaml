@@ -17,6 +17,7 @@
         <Border Background="DeepSkyBlue"
                 BorderBrush="OrangeRed"
                 BorderThickness="5"
+                CornerRadius="5"
                 Cursor="Hand"
                 Width="120"
                 Height="50">

@@ -20,7 +20,7 @@ namespace News.ViewModels
 
         private void OnStart()
         {
-            _workspaceService.OpenIndependenceWorkspace<WorkspaceViewModel>("Hot news 2020");
+            _workspaceService.OpenWorkspace<WorkspaceViewModel>("Hot news 2020");
         }
     }
 }
