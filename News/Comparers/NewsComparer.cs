@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using News.ViewModels.Items;
 
 namespace News.Comparers
@@ -21,7 +22,7 @@ namespace News.Comparers
 
         public int GetHashCode(NewsItemViewModel obj)
         {
-            return obj.Title.GetHashCode() ^ obj.PublishedDate.GetHashCode();
+            return obj.Url.GetHashCode() ^ obj.PublishedDate.GetHashCode();
         }
     }
 }
