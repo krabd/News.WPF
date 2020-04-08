@@ -17,9 +17,7 @@
               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ListView.ItemTemplate>
             <DataTemplate>
-                <Border BorderBrush="OrangeRed"
-                        BorderThickness="2"
-                        CornerRadius="5">
+                <Border Style="{StaticResource DefaultBorderStyle}">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -28,9 +26,8 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="{Binding Title}"
-                                   HorizontalAlignment="Stretch"
-                                   TextWrapping="Wrap"
-                                   FontSize="30" />
+                                   Style="{StaticResource TitleTextBlockStyle}"
+                                   HorizontalAlignment="Stretch" />
 
                         <TextBlock Text="{Binding Description}"
                                    HorizontalAlignment="Stretch"

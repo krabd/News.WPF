@@ -10,11 +10,14 @@
                     <Popup x:Name="PART_MainPopup"
                            Height="80"
                            Width="300">
-                        <Grid x:Name="ContentGrid" Background="Gray">
+                        <Grid x:Name="ContentGrid" 
+                              Background="{StaticResource DefaultBackgroundBrush}">
 
                             <TextBlock Text="{TemplateBinding Message}"
+                                       Style="{StaticResource TitleTextBlockStyle}"
+                                       Foreground="{StaticResource DefaultForegroundBrush}"
                                        HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center" />
 
                         </Grid>
                     </Popup>

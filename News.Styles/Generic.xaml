@@ -2,6 +2,8 @@
 
     <ResourceDictionary.MergedDictionaries>
 
+        <ResourceDictionary Source="Brushes.xaml" />
+        <ResourceDictionary Source="Styles/BorderStyles.xaml" />
         <ResourceDictionary Source="Styles/TextBlockStyles.xaml" />
         <ResourceDictionary Source="Styles/TabControlStyles.xaml" />
 

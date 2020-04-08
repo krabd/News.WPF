@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <Style TargetType="{x:Type TextBlock}" x:Key="CurrencyTextBlockStyle">
                 <Setter Property="FontSize" Value="25" />
+                <Setter Property="Foreground" Value="{StaticResource DefaultForegroundBrush}" />
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -28,7 +29,7 @@
 
         <DockPanel Grid.Row="0">
             <TextBlock Text="USD: "
-                       Style="{StaticResource CurrencyTextBlockStyle}" />
+                       Style="{StaticResource TitleTextBlockStyle}" />
 
             <TextBlock Text="{Binding Usd}"
                        Style="{StaticResource CurrencyTextBlockStyle}" />
@@ -36,14 +37,14 @@
 
         <DockPanel Grid.Row="1">
             <TextBlock Text="EUR: "
-                       Style="{StaticResource CurrencyTextBlockStyle}" />
+                       Style="{StaticResource TitleTextBlockStyle}" />
 
             <TextBlock Text="{Binding Eur}"
                        Style="{StaticResource CurrencyTextBlockStyle}" />
         </DockPanel>
 
         <TextBlock Text="Year statistics"
-                   Style="{StaticResource CurrencyTextBlockStyle}"
+                   Style="{StaticResource TitleTextBlockStyle}"
                    Margin="0,10,0,0"
                    Grid.Row="2" />
 

@@ -14,18 +14,15 @@
         d:DataContext="{d:DesignInstance viewModels:MainWindowViewModel}">
 
     <Grid>
-        <Border BorderBrush="OrangeRed"
-                BorderThickness="2"
-                CornerRadius="5"
+        <Border Style="{StaticResource DefaultBorderStyle}"
                 Cursor="Hand"
                 Width="120"
                 Height="50">
             <TextBlock Text="Click ME!"
-                       FontSize="25"
-                       FontWeight="Bold"
-                       Foreground="ForestGreen"
+                       Style="{StaticResource TitleTextBlockStyle}"
+                       Foreground="{StaticResource DefaultForegroundBrush}"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center" />
+                       VerticalAlignment="Center"/>
             <i:Interaction.Behaviors>
                 <behaviors:DragBehavior />
                 <behaviors:MouseClickBehavior Command="{Binding StartCommand}"/>
