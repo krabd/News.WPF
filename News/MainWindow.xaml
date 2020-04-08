@@ -19,6 +19,7 @@
                 Width="120"
                 Height="50">
             <TextBlock Text="Click ME!"
+                       ToolTip="Drag ME!"
                        Style="{StaticResource TitleTextBlockStyle}"
                        Foreground="{StaticResource DefaultForegroundBrush}"
                        HorizontalAlignment="Center"
