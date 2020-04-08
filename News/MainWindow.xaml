@@ -22,10 +22,10 @@
                        Style="{StaticResource TitleTextBlockStyle}"
                        Foreground="{StaticResource DefaultForegroundBrush}"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center" />
             <i:Interaction.Behaviors>
                 <behaviors:DragBehavior />
-                <behaviors:MouseClickBehavior Command="{Binding StartCommand}"/>
+                <behaviors:MouseClickBehavior Command="{Binding StartCommand}" />
             </i:Interaction.Behaviors>
         </Border>
     </Grid>

@@ -2,16 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TextBlock}" x:Key="TitleTextBlockStyle">
-        <Setter Property="FontSize" Value="25"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="HyperLinkTextBlockStyle">
-        <Setter Property="FontSize" Value="25"/>
-        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
-        <Setter Property="TextDecorations" Value="Underline"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight" />
+        <Setter Property="TextDecorations" Value="Underline" />
+        <Setter Property="Cursor" Value="Hand" />
     </Style>
-    
+
 </ResourceDictionary>

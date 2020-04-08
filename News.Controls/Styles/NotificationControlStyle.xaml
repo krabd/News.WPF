@@ -10,7 +10,7 @@
                     <Popup x:Name="PART_MainPopup"
                            Height="80"
                            Width="300">
-                        <Grid x:Name="ContentGrid" 
+                        <Grid x:Name="ContentGrid"
                               Background="{StaticResource DefaultBackgroundBrush}">
 
                             <TextBlock Text="{TemplateBinding Message}"

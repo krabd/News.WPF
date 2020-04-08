@@ -32,13 +32,13 @@
                         Command="{Binding ShutdownCommand}"
                         Width="200"
                         Height="40"
-                        FontSize="25"/>
+                        FontSize="25" />
 
                 <Button Content="Logout"
                         Command="{Binding LogoutCommand}"
                         Width="200"
                         Height="40"
-                        FontSize="25"/>
+                        FontSize="25" />
             </StackPanel>
 
             <controls:NotificationControl HorizontalAlignment="Center"
